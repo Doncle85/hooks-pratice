@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 const FrameworksList = () => {
-    let  [frameworks, setFrameworks] = useState([
+    let [frameworks, setFrameworks] = useState([
         {
             id: 1,
             name: 'React'
@@ -20,7 +20,7 @@ const FrameworksList = () => {
 
     const addFramework = (e) => {
         e.preventDefault();
-        setFrameworks([...frameworks, { id: Date.now(), name: frameworkName}]);
+        setFrameworks([...frameworks, {id: Date.now(), name: frameworkName}]);
         setFrameworkName('')
     }
     return (
@@ -32,6 +32,17 @@ const FrameworksList = () => {
                     onChange={e => setFrameworkName(e.target.value)}/>
                 <button type='submit'>add</button>
             </form>
+            <hr/>
+            {
+                (frameworks.length === 0) ? (
+                    <h2>No frameworks</h2>) : (
+                    <ul>
+                        {
+                            frameworks.map(fwk => <li key={fwk.id}>{fwk.name}</li>)
+                        }
+                    </ul>
+                )
+            }
         </div>
     );
 }
