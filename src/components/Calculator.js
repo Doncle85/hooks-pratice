@@ -19,7 +19,7 @@ const calculatorReducer = (state, action) => {
 const Calculator = () => {
     const [a, setA] = useState(0);
     const [b, setB] = useState(0);
-    const [state, dispatch] = useReducer(calculatorReducer, {a,b})
+    const [state, dispatch] = useReducer(calculatorReducer, {a, b})
 
     const changeA = (e) => {
         setA(Number(e.target.value))
@@ -30,17 +30,24 @@ const Calculator = () => {
     const reset = (e) => {
         setA(0);
         setB(0);
-        dispatch({ typpe: 'RESET'})
+        dispatch({ type: 'RESET'})
     }
     return (
         <div>
-            <input type='text' value={a} onChange={a} />
-            <input type='text' value={b} onChange={b} />
-            <button onClick={() => dispatch({ type: 'ADD', a: a, b: b})}>+</button>
-            <button onClick={() => dispatch({ type: 'MULTIPLY', a: a, b: b})}>*</button>
-            <button onClick={() => dispatch({ type: 'DIVIDE', a: a, b: b})}>/</button>
-            <button pnclick={rest}>reset</button>
+            <input type='text' value={a} onChange={changeA} /><br/><br/>
+            <input type='text' value={b} onChange={changeB} /><br/><br/>
+            <button onClick={() => dispatch({ type: 'ADD', a: a, b: b})}>+</button><br/><br/>
+            <button onClick={() => dispatch({ type: 'MULTIPLY', a: a, b: b})}>*</button><br/><br/>
+            <button onClick={() => dispatch({ type: 'DIVIDE', a: a, b: b})}>/</button><br/><br/>
+            <button onClick={reset}>reset</button>
+            {state.total}
+            <div>
+                <code>
+                    {JSON.stringify(state, null, 4)}
+                </code>
+            </div>
         </div>
+
     );
 }
 
